@@ -1,0 +1,24 @@
+<fieldset>
+  <legend>{{category}} Question - {{id}}</legend>
+  <div class="question-div">
+    <p>{{id}}. <span [innerHTML]="currentQuestion"></span></p>
+    <div>
+      <input type="radio" name="option" [value]="true" [(ngModel)]="option" (change)="handleRadioInputChange($event)">
+      <label for="option1">True</label>
+    </div>
+    <div>
+      <input type="radio" name="option" [value]="false" [(ngModel)]="option" (change)="handleRadioInputChange($event)">
+      <label for="option2">False</label>
+    </div>
+    <div class="error" *ngIf="errMessage.length > 0">
+      {{errMessage}}
+    </div>
+    <div class="btn-div">
+      <button (click)="nextClick()">
+        {{ id === questionDataLength ? "Submit" : "Next" }}
+        <!-- <span *ngIf="id === questionDataLength">Submit</span>
+          <span *ngIf="id !== questionDataLength">Next</span> -->
+      </button>
+    </div>
+  </div>
+</fieldset>

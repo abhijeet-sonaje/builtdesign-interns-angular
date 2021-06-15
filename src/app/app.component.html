@@ -1,34 +1,19 @@
 <div>
   <h1>A Simple Quiz</h1>
 
-  <fieldset *ngIf="!showScoreElem">
-    <legend>Question - {{id}}</legend>
-    <div class="question-div">
-      <p>{{id}}. <span [innerHTML]="defaultQuestion"></span></p>
-      <div>
-        <input type="radio" name="option" [value]="true" [(ngModel)]="option" (change)="handleRadioInputChange($event)">
-        <label for="option1">True</label>
-      </div>
-      <div>
-        <input type="radio" name="option" [value]="false" [(ngModel)]="option"
-          (change)="handleRadioInputChange($event)">
-        <label for="option2">False</label>
-      </div>
-      <div class="error" *ngIf="errMessage.length > 0">
-        {{errMessage}}
-      </div>
-      <div class="btn-div">
-        <button (click)="nextClick()">
-          {{ id === questionDataLength ? "Submit" : "Next" }}
-          <!-- <span *ngIf="id === questionDataLength">Submit</span>
-          <span *ngIf="id !== questionDataLength">Next</span> -->
-        </button>
-      </div>
-    </div>
-  </fieldset>
+  <div>
+    <input type="radio" id="category1" name="category" value="27" [(ngModel)]="categorySelected" />
+    <label for="category1">Animals</label>
+    <input type="radio" id="category2" name="category" value="28" [(ngModel)]="categorySelected" />
+    <label for="category2">Vehicle</label>
+  </div>
 
-  <div *ngIf="showScoreElem">
+  <app-question *ngIf="score === 0" [category]="categorySelected" (newScoreEvent)="updateNewScore($event)">
+  </app-question>
+
+  <div *ngIf="score !== 0">
     <h3>Thank you for participating!</h3>
     <p>Your Score <strong>{{score}}</strong></p>
+    <button (click)="refresh()">Refresh</button>
   </div>
 </div>
